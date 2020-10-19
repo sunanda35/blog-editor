@@ -1,0 +1,15 @@
+:root {
+    /* header_color */
+    --header-bg-color: rgb(119, 171, 255);
+    --header-color: whitesmoke;
+    --header-shadow-color: rgb(54, 79, 122);
+
+    /* footer_color */
+    --footer-bg-color: rgb(231, 231, 231);
+    --footer-social-icon-color: rgb(119, 171, 255);
+
+    /* Post_Author_color */
+    --post-author-color: rgba(0,0,0,0.8);
+    --post-title-color: rgba(0,0,0,0.8);
+
+  }

@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "editor-blog",
+    "public": "editor",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
