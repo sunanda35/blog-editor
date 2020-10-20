@@ -3,25 +3,25 @@ import './header.css'
 import SearchIcon from '@material-ui/icons/Search'
 import {title} from '../../production/Strings'
 import { Link } from 'react-router-dom'
+import { Avatar } from '@material-ui/core'
 
-function Header() {
+function Header({url}) {
     const [value, setValue] = useState()
 
     return (
-        <div id="head" className='header'>
+        <div>
+            <div id="head" className='header'>
             <div className='header_left'>
             <Link className='li' to='/'><h1 className='header_logo'>{title}</h1></Link>
             </div>
 
             <div className='header_right'>
-                <div id='input'>
-                    <input placeholder="Search here" onChange={e=>setValue(e.target.value)} type='text'/>
-                    <SearchIcon fontSize='medium' onClick={event =>  window.location.href=`/search/find=${value}`} className='header_search'/>
-                </div>
                 <div className='header_icon_container'>
-                    <h4 onClick={'fuck off'} className='header_icons header_write'>Write here</h4>
+                    <Avatar className='h_avatar' src='https://avatars3.githubusercontent.com/u/46472626?s=400&u=fbdf983ebbbed39b396e12718971d582c123d7f3&v=4' alt='author-photo' />
                 </div>
             </div>
+            </div>
+            
         </div>
     )
 }

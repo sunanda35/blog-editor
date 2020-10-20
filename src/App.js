@@ -7,8 +7,8 @@ function App() {
   return (
       <BrowserRouter>
         <Switch>
-          <Route component={Stories} path='/' exact/>
-          <Route component={Stat} path='/stories' exact/>
+          <Route component={Stories} path='/' />
+          <Route component={Stat} path='/stat' exact/>
         </Switch>
       </BrowserRouter> 
   );
