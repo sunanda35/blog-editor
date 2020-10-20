@@ -1,0 +1,33 @@
+.stories_header{
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    margin-bottom: 10px;
+}
+.stories_h{
+    width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: auto;
+    border-bottom: 1px solid grey;
+}
+.stories_h >p{
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 2px 10px;
+    cursor: pointer;
+    user-select: none;
+}
+.s_t_p{
+    border-bottom: 2px solid rgb(51, 50, 50);
+}
+
+.stories_b{
+    width: 70%;
+    min-height: 100vh;
+    display: flex;
+    margin: auto;
+}

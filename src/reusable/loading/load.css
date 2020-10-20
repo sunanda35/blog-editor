@@ -1,0 +1,16 @@
+.spinner{
+    width: 10%;
+    margin: auto;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}
+.spinner>img{
+    width: 100%;
+    object-fit: contain;
+}
+@media only screen and (max-width: 720px){
+    .spinner{
+        width: 35%;
+    }
+}

@@ -16,6 +16,7 @@
 .header_logo{
     font-size: 32px;
     object-fit: contain;
+    color: black;
 }
 .header_right{
     display: flex;

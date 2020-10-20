@@ -1,12 +1,10 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './header.css'
-import SearchIcon from '@material-ui/icons/Search'
 import {title} from '../../production/Strings'
 import { Link } from 'react-router-dom'
 import { Avatar } from '@material-ui/core'
 
-function Header({url}) {
-    const [value, setValue] = useState()
+function Header() {
 
     return (
         <div>
