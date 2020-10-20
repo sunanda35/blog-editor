@@ -1,10 +1,16 @@
 import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Stories from './pages/stories/Stories'
+import Stat from './pages/stats/Stat'
 
 function App() {
   return (
-    <div className="App">
-          <h1>sunanda is online</h1>
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route component={Stories} path='/' exact/>
+          <Route component={Stat} path='/stories' exact/>
+        </Switch>
+      </BrowserRouter> 
   );
 }
 

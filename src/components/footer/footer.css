@@ -1,0 +1,26 @@
+@import '../../production/Colors.css';
+
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--footer-bg-color);
+    padding: 25px 10px;
+}
+.footer_left >ul, .footer_right > ul{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+}
+.footer_left > ul >li{
+    width: auto;
+    margin-right: 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.footer_right >ul>li{
+    margin-left: 10px;
+    color: var(--footer-social-icon-color);
+}

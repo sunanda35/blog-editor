@@ -9,9 +9,12 @@ const firebaseApp = firebase.initializeApp(
     projectId: "blog-85d67",
     storageBucket: "blog-85d67.appspot.com",
     messagingSenderId: "360962377301",
-    appId: "1:360962377301:web:e3a3a57601a61ca77db6dc",
-    measurementId: "G-1HQDCGTZ5D"
+    appId: "1:360962377301:web:88a80373543532167db6dc",
+    measurementId: "G-RR3G4WKX79"
   }
+
+
+
 );
 
 
