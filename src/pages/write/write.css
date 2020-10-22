@@ -33,7 +33,7 @@
     color: rgb(255, 217, 0);
 }
 .draft{
-    min-height: 100vh;
+    min-height: 90vh;
     width: 60%;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -43,8 +43,8 @@
 }
 .d_title{
     width: 99%;
-    height: 50px;
-    padding-bottom: 100px;
+    height: inherit;
+    /* padding-bottom: 100px; */
     margin: auto;
     font-size: 3rem;
 }
