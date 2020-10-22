@@ -1,0 +1,16 @@
+
+.head_h{
+    width: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 100px;
+}
+.head_h > p{
+    font-size: 5rem;
+    font-weight: bold;
+}
+.head_b{
+    min-height: 80vh;
+}

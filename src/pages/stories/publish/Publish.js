@@ -16,7 +16,7 @@ export default function Publish() {
             })))
             setLoading(false)
         })
-    })
+    },[story])
     return (
         <div>
             <div className='publish'>

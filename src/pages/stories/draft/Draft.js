@@ -15,7 +15,7 @@ function Draft() {
             })))
             setLoading(false)
         })
-    })
+    },[story])
     return (
         <div className='posts'>
             <div>

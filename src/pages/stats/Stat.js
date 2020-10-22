@@ -4,6 +4,7 @@ import {db} from '../../production/firebase'
 import Cload from '../../reusable/loading/Load'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
+import Post from '../stats/posts/Post'
 
 function Stat() {
     const [data, setData] = useState([])
@@ -21,9 +22,18 @@ function Stat() {
 
     if(loading) return <Cload/>
     else return (
-        <div>
+        <div className='head'>
             <Header/>
-            <h1>Here i have to write the statistics of this website</h1>
+            <div className='head_h'>
+                <p>Your {data.length} sories found</p>
+            </div>
+            <div className='head_b'>
+                {
+                    data.map((post, index)=>{
+                        return <Post title={post.title} description={post.description} time={post.time} views={post.views}/>
+                    })
+                }
+            </div>
             <Footer/>
         </div>
     )

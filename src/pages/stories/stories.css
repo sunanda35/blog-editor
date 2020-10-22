@@ -31,3 +31,8 @@
     display: flex;
     margin: auto;
 }
+@media only screen and (max-width: 600px){
+    .stories_b{
+        width: 95%;
+    }
+}
