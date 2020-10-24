@@ -1,0 +1,92 @@
+.signin{
+    width: 500px;
+    height: 500px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+    box-shadow: 2px 3px 15px rgb(238, 238, 238);
+}
+.signin >p{
+    font-size: xx-large;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    padding-top: 60px;
+}
+.lgin{
+    margin-top: 50px;
+}
+.lgin>p{
+    text-align: center;
+    margin-top: 6px;
+}
+.btn{
+    width: 20%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(255, 230, 0);
+    border-radius: 6px;
+    cursor: pointer;
+}
+.brand{
+    width: 200px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-around;
+}
+.brandin{
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    border: 1px solid gray;
+    border-radius: 50%;
+    padding: 6px;
+    cursor: pointer;
+}
+.brandin:hover{
+    background-color: rgb(211, 216, 209);
+    transition: all 0.3s;
+}
+.brandin > img{
+    width: 100%;
+}
+.signin>h4{
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.input{
+    width: 330px;
+    height: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    padding-left: 2px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: rgb(238, 238, 238);
+
+}
+.comp{
+    width: 99%;
+    height: 100%;
+    border: none;
+    font-size: large;
+    font-weight: bold;
+    background-color: rgb(238, 238, 238);;
+}
+.comp:focus{
+    outline: none;
+}
+@media only screen and (max-width: 600px) {
+    .signin{
+        width: 99%;
+        margin: auto;
+    }
+}
