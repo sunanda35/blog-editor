@@ -79,6 +79,9 @@
     border-radius: 6px;
     cursor: pointer;
 }
+.btn:hover, .btn:focus{
+    font-weight: bold;
+}
 @media only screen and (max-width: 530px) {
     .signin{
         width: 99%;

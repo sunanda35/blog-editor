@@ -30,7 +30,7 @@ function Signin() {
                     <p>Forget password?</p>
                 </div>
                 <div>
-                <p className='btn' onClick={alertt}>Submit</p>
+                <p className='btnn' onClick={alertt}>Submit</p>
                 </div>
                 <h4>OR</h4>
                 <div className='brand'>
