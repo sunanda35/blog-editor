@@ -6,6 +6,8 @@ import Error from './reusable/error/Error'
 import Write from './pages/write/Write'
 import Signin from './pages/land/signin/Signin'
 import Signup from './pages/land/signup/Signup'
+import editpage from './pages/editProfile/editpage';
+import user from './pages/land/setuser/user';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
           <Redirect from='/' to='/login' exact />
           <Route component={Signin} path='/login' exact/>
           <Route component={Signup} path='/signup' exact/>
+          <Route component={user} path='/boot' exact />
+          <Route component={editpage} path='/editurprofile' exact />
           <Route component={Stories} path='/stories' exact/>
           <Route component={Write} path='/draft' exact/>
           <Route component={Stat} path='/stat' exact/>
