@@ -1,13 +1,16 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import './stories.css'
 import Footer from '../../components/footer/Footer'
 import Header from '../../components/header/Header'
 import Draft from './draft/Draft'
 import Publish from './publish/Publish'
+import {Redirect} from 'react-router-dom'
+import {AuthContext} from '../../reusable/authentication/auth'
 
-function Stories() {
+function Stories({history}) {
     const [select, setSelect] = useState(true)
     
+
     return (
         <div>
             <Header/>

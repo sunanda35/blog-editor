@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useContext} from 'react'
 import './signup.css'
 import Footer from '../../../components/footer/Footer'
 import Header from '../../../components/header/Header'
@@ -6,13 +6,42 @@ import Google from '../../../assets/brand/google.svg'
 import Facebook from '../../../assets/brand/facebook.svg'
 import Twitter from '../../../assets/brand/twitter.svg'
 import Linkdin from '../../../assets/brand/linkedin.svg'
+import {auth} from '../../../production/firebase'
+import {Redirect, withRouter} from 'react-router-dom'
+import {AuthContext} from '../../../reusable/authentication/auth'
+import {db} from '../../../production/firebase'
 
-export default function Land() {
+function Land({history}) {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
-    const alertt = ()=>{
-        alert(email +'and' + password);
+    
+    const signuphappen = () =>{
+        auth.createUserWithEmailAndPassword(email, password).then((user)=>{
+            db.collection('author').doc(user.user.uid).set({
+                'userID': `${user.user.uid}`,
+                'email':`${user.user.email}`
+            }).then(()=>{
+                alert('Successfully New account created')
+                history.push('/boot')
+            }).catch(err=>{
+                alert('pass: '+err.message)
+            })
+            history.push('/boot')
+        }).catch(err=>alert(err.message))
+
     }
+
+    // const currUser = useContext(AuthContext);
+    // if(currUser){
+    //     db.collection('author').doc().set({
+    //         'userID': currUser.uid
+    //     }).then(()=>{
+    //         alert
+    //     }).catch(err=>{
+    //     })
+    //     // return <Redirect to='/stories' />
+    // }
+
 
     return (
         <div>
@@ -43,10 +72,11 @@ export default function Land() {
                     </div>
                 </div>
                 <div>
-                <p className='btn' onClick={alertt}>Submit</p>
+                <p className='btn' onClick={signuphappen}>Submit</p>
                 </div>
             </div>
             <Footer/>
         </div>
     )
 }
+export default withRouter(Land)

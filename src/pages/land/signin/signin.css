@@ -89,6 +89,22 @@
 .comp:focus{
     outline: none;
 }
+.lgin_f{
+    width: 60%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.lgin_f>p{
+    color: teal;
+    cursor: pointer;
+}
+.lgin_li{
+    text-decoration: none;
+    color: teal;
+}
 @media only screen and (max-width: 600px) {
     .signin{
         width: 99%;

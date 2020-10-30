@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import './user.css'
 import {title} from '../../../production/Strings'
 import {db} from '../../../production/firebase'
@@ -7,45 +7,62 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import Tooltip from '@material-ui/core/Tooltip';
 import ErrorIcon from '@material-ui/icons/Error';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import {AuthContext} from '../../../reusable/authentication/auth'
+import Cload from '../../../reusable/loading/Load';
 
-export default function User() {
+export default function User({history}) {
     const [username, setUsername] = useState()
     const [progress, setProgress] = useState(false)
     const [success, setSuccess] = useState(false)
     const [wrong, setWrong] = useState(false)
-    const [error, setError] = useState('fuck off buddy')
+    const currUser = useContext(AuthContext);
 
-    const firestoreAutoId = ()=> {
-        const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-      
-        let autoId = ''
-      
-        for (let i = 0; i < 20; i++) {
-          autoId += CHARS.charAt(
-            Math.floor(Math.random() * CHARS.length)
-          )
-        }
-        return autoId
-      }
+    const [state, setState] = useState(false)
+
+
 
     useEffect(()=>{
+        setWrong(false)
+        setSuccess(false)
         setProgress(true)
-        db.collection('author').where("userName", "not-in", "@somu").doc("sunanda").set({
-            'authId': 'slkdfkldhfljsdhfjhsd',
-            'userName': `${username}`
-        }).then(()=>{
+        db.collection("author").where("userName", "==", `@${username}`).get().then((response)=>{
+                response.docs.map(docc=>{
+                    setProgress(false)
+                    if(docc.data().userName===`@${username}`){
+                        setProgress(false)
+                        setSuccess(false)
+                        setWrong(true)
+                        setState(false);
+                    }
+                })
+        }).catch((err)=>{
+            setWrong(false)
+            setProgress(false)
+            setSuccess(false)
+            alert(err.message)
+        })
+        if(username){
+            setWrong(false)
             setProgress(false)
             setSuccess(true)
-        }).catch(err=>{
-            setProgress(false)
-            setWrong(true)
-            setError(err.messege)
-        })
+            setState(true)
+        }
+        currUser && console.log(currUser.uid)
     },[username])
     
+    const setusername = () =>{
+        currUser && db.collection("author").doc(currUser.uid).set({
+            'userName': `@${username}`
+        }).then(()=>{
+            alert('gotit')
+            history.push('/stories')
+        }).catch(err=>alert(err.message))
+    }
 
-    return (
+
+    if(!currUser) return <Cload/>
+    else return (
         <div className='setuser'>
             <h1>Welcome to {title}, Internet's free and open platform where readers find dynamic thinking, and where anyone can share their writing on any topic to the web and get rewarded.</h1>
             <p>"Live life as though nobody is watching, and express yourself as though everyone is listening."</p>
@@ -82,11 +99,11 @@ export default function User() {
               {
                   wrong && <div className='error' >
                   <ErrorIcon className='err_icn' />
-                  <p>{error}</p>
+                  <p>This username is already taken</p>
               </div>
               }
               {
-                  success && <button disabled={success} className='nextbtn'><Link className='li' to={success && '/editurprofile'}>Next >></Link></button>
+                  success && <button onClick={setusername} className='nextbtn'>sdfsdf</button>
               }
 
         </div>
