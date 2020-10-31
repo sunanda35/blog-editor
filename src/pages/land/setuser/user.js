@@ -7,7 +7,6 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import Tooltip from '@material-ui/core/Tooltip';
 import ErrorIcon from '@material-ui/icons/Error';
-import { Link, Redirect } from 'react-router-dom';
 import {AuthContext} from '../../../reusable/authentication/auth'
 import Cload from '../../../reusable/loading/Load';
 
@@ -54,7 +53,7 @@ export default function User({history}) {
     const setusername = () =>{
         currUser && db.collection("author").doc(currUser.uid).set({
             'userName': `@${username}`
-        }).then(()=>{
+        },{merge: true}).then(()=>{
             alert('gotit')
             history.push('/stories')
         }).catch(err=>alert(err.message))

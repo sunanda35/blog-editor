@@ -1,4 +1,4 @@
-import React,{useState, useContext} from 'react'
+import React,{useState} from 'react'
 import './signup.css'
 import Footer from '../../../components/footer/Footer'
 import Header from '../../../components/header/Header'
@@ -7,8 +7,7 @@ import Facebook from '../../../assets/brand/facebook.svg'
 import Twitter from '../../../assets/brand/twitter.svg'
 import Linkdin from '../../../assets/brand/linkedin.svg'
 import {auth} from '../../../production/firebase'
-import {Redirect, withRouter} from 'react-router-dom'
-import {AuthContext} from '../../../reusable/authentication/auth'
+import {withRouter} from 'react-router-dom'
 import {db} from '../../../production/firebase'
 
 function Land({history}) {
