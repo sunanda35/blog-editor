@@ -33,7 +33,7 @@ export default function User({history}) {
         setSuccess(false)
         setProgress(true)
         db.collection("author").where("userName", "==", `@${username}`).get().then((response)=>{
-                response.docs.map(docc=>{
+                response.docs.map((docc)=>{
                     setProgress(false)
                     if(docc.data().userName===`@${username}`){
                         setProgress(false)
@@ -53,7 +53,7 @@ export default function User({history}) {
             setSuccess(true)
         }
         currUser && console.log(currUser.uid)
-    },[username])
+    },[username,currUser])
     
     const setusername = () =>{
         currUser && db.collection("author").doc(currUser.uid).set({

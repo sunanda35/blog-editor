@@ -1,9 +1,9 @@
 .stories_header{
     width: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: transparent;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 10;
     margin-bottom: 10px;
 }
 .stories_h{
@@ -12,6 +12,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
     margin: auto;
+    background-color: rgb(255, 255, 255);
     border-bottom: 1px solid grey;
 }
 .stories_h >p{

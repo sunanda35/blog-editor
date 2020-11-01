@@ -34,7 +34,7 @@ function Stat({history}) {
             }
             setLoading(false)
         })
-    })
+    },[data, currUser])
     
 
 

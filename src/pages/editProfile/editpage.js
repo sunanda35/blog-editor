@@ -59,8 +59,7 @@ export default function Editpage({history}) {
             'ln': `${linkdIN}`,
             'tw': `${twit}`
         },{merge: true}).then(()=>{
-            console.log(name, uBio, uName, uImage, git, linkdIN, twit)
-            // alert('Your Profile data successfully updated')
+            alert('Your Profile data successfully updated')
         }).catch(err=>alert(err.message))
     }
     console.log(name, uBio, uName, uImage, git, linkdIN, twit)
@@ -93,7 +92,7 @@ export default function Editpage({history}) {
             <div className='editprofile'>
                 <div className='profile'>
                     <div className='img' onClick={uploadhandler}>
-                        <img src={uImage?imgload?Spinner:uImage:imgload?Spinner:ProfileImg} alt='profile image'/>
+                        <img src={uImage?imgload?Spinner:uImage:imgload?Spinner:ProfileImg} alt={name?name:'Profile Photo'}/>
                     </div>
                     <div className='upload_img'>
                     <input type="file" accept="image/*" onChange={e=>setImage(e.target.files[0])} />

@@ -5,6 +5,7 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 export default function Npost() {
     return (
         <div className='nopost'>
+            <p>Sorry, No draft found to show :(</p>
             <h1><DraftsIcon className='nopost_icn' fontSize='medium'/>Try a new Draft</h1>
             <p>Get Publishing Guide....</p>
             <div className='post_help'>
