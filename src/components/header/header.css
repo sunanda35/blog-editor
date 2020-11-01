@@ -9,7 +9,7 @@
     padding: 10px 5px 10px 5px;
     position: sticky;
     top: 0;
-    z-index: 10000;
+    /* z-index: 10000; */
     background-color: whitesmoke;
     color: var(--header-color);
 }
@@ -32,4 +32,20 @@
     background-color: blanchedalmond;
     margin-bottom: 10px;
 }
-
+.header_icon_container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.header_icon_container>h3{
+    color: black;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.header_icon_container>h3:hover{
+    background-color: gray;
+    color: white;
+    transition: all .5s;
+}

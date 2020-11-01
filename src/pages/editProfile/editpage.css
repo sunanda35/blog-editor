@@ -2,37 +2,62 @@
     width: 70%;
     margin: auto;
     display: flex;
-    border: 1px solid black;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 .profile{
     width: 40%;
     padding: 10px;
     overflow: hidden;
-    border: 2px solid green
 }
 .img{
-    width: 100%;
+    width: 250px;
+    height: 250px;
+    margin: auto;
+    position: relative;
+    margin-bottom: 50px;
     border-radius: 50%;
+    border: 10px solid rgb(3,155,229);
     overflow: hidden;
+    cursor: pointer;
 }
 .img>img{
-    width: 100%;
+    height: 100%;
     object-fit: contain;
 }
 .inputProf{
     width: 100%;
     height: 40px;
     padding: 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     align-items: center;
     display: flex;
     overflow: hidden;
-    background-color: gray;
+    background-color: rgb(3,155,229);
     border-radius: 5px;
+}
+.inputProf>p{
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+    font-size: large;
+    font-weight: bold;
 }
 .inputIcn{
     padding-left: 15px;
     padding-right: 15px;
+    color: white;
 
+}
+.linkdin{
+    background-color:rgb(0,121,169);
+}
+.twit{
+    background-color: rgb(29,161,242);
+}
+.github{
+    background-color: rgb(36,41,46);
 }
 .inputProf>input{
     height: inherit;
@@ -45,12 +70,108 @@
     border-bottom-right-radius: 5px;
     background-color: white;
 }
+.user_go{
+    cursor: pointer;
+}
+.user_go>a{
+    text-decoration: none;
+    color: rgb(48, 48, 48);
+}
 .inputProf>input:focus{
     outline: none;
 }
+.profile_tag{
+    width: 100%;
+}
+.profile_tag>p{
+    font-size: xx-large;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+.profile_tag>h2{
+    font-size: xx-large;
+}
 .bio{
-    width: 60%;
+    width: 50%;
     padding: 20px;
     overflow: hidden;
-    border: 2px solid blue;
+}
+.inputBio{
+    width: 100%;
+    height: inherit;
+    padding: 2px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    background-color: rgb(3,155,229);
+    border-radius: 5px;
+}
+.inputBio>p{
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+}
+.inputBio>textarea{
+    width: inherit;
+    height: 120px;
+    border: none;
+    padding-left: 5px;
+    border-left: 1px solid black;
+    font-size: x-large;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: white;
+}
+.inputBio>textarea:focus{
+    outline: none;
+}
+.upload_img{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.submit{
+    width: 250px;
+    text-align: center;
+    font-size: large;
+    margin: auto;
+    margin-bottom: 100px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: aqua;
+    cursor: pointer;
+}
+.submit:hover{
+    background-color: rgb(156, 156, 156);
+    transition: all .5s;
+}
+@media only screen and (max-width: 1000px) {
+    .editprofile{
+        width: 95%;
+    }
+    .profile, .bio{
+        width: 100%;
+    }
+    .bio{
+        padding: 10px;
+    }
+    .profile_tag{
+        display: none;
+    }
+    .inputBio{
+        margin-top: 0;
+    }
+    .inputBio>textarea{
+        font-size: medium;
+    }
+    .inputProf>input{
+        font-size: medium;
+    }
 }

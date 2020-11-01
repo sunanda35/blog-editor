@@ -1,17 +1,26 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import './stat.css'
-import {db} from '../../production/firebase'
+import {db, auth} from '../../production/firebase'
 import Cload from '../../reusable/loading/Load'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import Post from '../stats/posts/Post'
-import {AuthContext} from '../../reusable/authentication/auth'
-import { Redirect, withRouter } from 'react-router-dom'
 
-function Stat() {
+function Stat({history}) {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
-    const currUser = useContext(AuthContext);
+    const [currUser, setCurrUser] = useState()
+
+    useEffect(()=>{
+        auth.onAuthStateChanged(user=>{
+            if(user){
+                setCurrUser(user)
+            }else{
+                history.push('/login')
+            }
+        })
+    })
+
 
     useEffect(()=>{
         currUser && db.collection('posts').orderBy("views", "desc").where("userID", "==", currUser.uid).onSnapshot(snapshot => {
@@ -29,9 +38,7 @@ function Stat() {
     
 
 
-    if(loading) return <Cload/>
-    else if(loading && !currUser) return <Cload/>
-    else if(!loading && !currUser) return <Redirect to='/login' />
+    if(loading || !currUser) return <Cload/>
     else return (
         <div className='head'>
             <Header/>

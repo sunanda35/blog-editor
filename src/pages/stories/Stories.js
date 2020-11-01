@@ -1,17 +1,29 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import './stories.css'
 import Footer from '../../components/footer/Footer'
 import Header from '../../components/header/Header'
 import Draft from './draft/Draft'
 import Publish from './publish/Publish'
-import {Redirect} from 'react-router-dom'
-import {AuthContext} from '../../reusable/authentication/auth'
+import {auth} from '../../production/firebase'
+import Cload from '../../reusable/loading/Load'
 
 function Stories({history}) {
     const [select, setSelect] = useState(true)
-    
+    const [currUser, setCurrUser] = useState()
 
-    return (
+    useEffect(()=>{
+        auth.onAuthStateChanged(user=>{
+            if(user){
+                setCurrUser(user)
+            }else{
+                history.push('/login')
+            }
+        })
+    })
+
+    
+    if(!currUser) return <Cload/>
+    else return (
         <div>
             <Header/>
             <div className='stories_header'>
@@ -22,7 +34,7 @@ function Stories({history}) {
             </div>
             <div className='stories_b'>
                 {
-                    select? <Draft/>:<Publish/>
+                    select? <Draft userID={currUser.uid} />:<Publish userID={currUser.uid} />
                 }
             </div>
             <Footer/>

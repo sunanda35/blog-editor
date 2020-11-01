@@ -1,13 +1,12 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import './user.css'
 import {title} from '../../../production/Strings'
-import {db} from '../../../production/firebase'
+import {db, auth} from '../../../production/firebase'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import Tooltip from '@material-ui/core/Tooltip';
 import ErrorIcon from '@material-ui/icons/Error';
-import {AuthContext} from '../../../reusable/authentication/auth'
 import Cload from '../../../reusable/loading/Load';
 
 export default function User({history}) {
@@ -15,10 +14,18 @@ export default function User({history}) {
     const [progress, setProgress] = useState(false)
     const [success, setSuccess] = useState(false)
     const [wrong, setWrong] = useState(false)
-    const currUser = useContext(AuthContext);
+    const [currUser, setCurrUser] = useState(null)
 
-    const [state, setState] = useState(false)
-
+    
+    useEffect(()=>{
+        auth.onAuthStateChanged(user=>{
+            if(user){
+                setCurrUser(user)
+            }else{
+                history.push('/login')
+            }
+        })
+    })
 
 
     useEffect(()=>{
@@ -32,7 +39,6 @@ export default function User({history}) {
                         setProgress(false)
                         setSuccess(false)
                         setWrong(true)
-                        setState(false);
                     }
                 })
         }).catch((err)=>{
@@ -45,7 +51,6 @@ export default function User({history}) {
             setWrong(false)
             setProgress(false)
             setSuccess(true)
-            setState(true)
         }
         currUser && console.log(currUser.uid)
     },[username])
