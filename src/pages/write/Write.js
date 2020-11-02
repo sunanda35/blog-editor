@@ -25,6 +25,7 @@ export default class Draft extends React.Component{
             story: '',
             seoTitle: '',
             description: '',
+            userName: '',
             image: '',
             tags: [],
             canonical: '',
@@ -61,6 +62,9 @@ export default class Draft extends React.Component{
             if(user) {
                 this.setState({ pageLoad: true})
                 this.setState({currUser: user})
+                db.collection('author').doc(user.uid).get().then(response=>{
+                    this.setState({userName: response.data().userName})
+                })
                 this.dataupdate()
             }
             else window.open('/login')
@@ -69,17 +73,11 @@ export default class Draft extends React.Component{
 
 
     prevdataset(){
-        if(this.state.currUser && this.state.urlID){
-            this.setState({saving: true})
-            this.setState({
-                seoTitle: this.state.title,
-                slugUrl: this.state.title.replace(/\s+/g, '-')+'-'+this.state.urlID.substring(0,5),
-                description: this.state.story.replace( /(<([^>]+)>)/ig, '').substring(0,150)
-            })
         db.collection('draft').doc(this.state.urlID).set({
             'title': `${this.state.title}`,
             'seoTitle': `${this.state.seoTitle}`,
             'description': `${this.state.description}`,
+            'userName': `${this.state.userName}`,
             'blog': `${this.state.story}`,
             'slugUrl': `${this.state.slugUrl}`,
             'time': `${firestore.Timestamp.now()}`
@@ -87,7 +85,6 @@ export default class Draft extends React.Component{
             this.setState({err: err.message})
             alert(err.message)
         })
-        }
     }
     dataupdate(){
         if(this.state.urlID && this.state.currUser) db.collection("draft").doc(this.state.urlID).get().then((response)=>{
@@ -97,7 +94,8 @@ export default class Draft extends React.Component{
                     seoTitle: response.data().seoTitle,
                     img: response.data().img,
                     description: response.data().description,
-                    tags: response.data().tags,
+                    userName: response.data().userName,
+                    tags: response.data().tags,'userName': `${this.state.userName}`,
                     story: response.data().blog,
                     canonical: response.data().canonical,
                 })
@@ -129,6 +127,7 @@ export default class Draft extends React.Component{
             db.collection('draft').doc(this.state.urlID).set({
                 'seoTitle': `${this.state.seoTitle}`,
                 'description': `${this.state.description}`,
+                'userName': `${this.state.userName}`,
                 'img': `${this.state.img}`,
                 'tags': `${this.state.tags}`,
                 'canonical': `${this.state.canonical}`
@@ -162,6 +161,7 @@ export default class Draft extends React.Component{
                     'title': `${this.state.title}`,
                     'seoTitle': `${this.state.seoTitle}`,
                     'description': `${this.state.description}`,
+                    'userName': `${this.state.userName}`,
                     'blog': `${this.state.story}`,
                     'slugUrl': `${this.state.slugUrl}`,
                     'time': `${firestore.Timestamp.now()}`
@@ -237,7 +237,8 @@ export default class Draft extends React.Component{
                    value={this.state.story}
                    init={{
                      height: 500,
-                     menubar: false,
+                    //  menubar: true,
+                    //  inline: true
                      branding: false,
                      plugins: [
                        'advlist autolink lists link image charmap print preview anchor',
@@ -335,10 +336,7 @@ export default class Draft extends React.Component{
                                     width: '100%', 
                                     height: '100%', 
                                     border: 'none', 
-                                    backgroundColor: 'transparent'}} type='text' maxLength='100' onChange={e=>{
-                                        this.prevdataset(); 
-                                        this.setState({seoTitle: e.target.value})
-                                    }} value={this.state.seoTitle?this.state.seoTitle:null} placeholder='Your story SEO title ..' />
+                                    backgroundColor: 'transparent'}} type='text' maxLength='100' onChange={e=> this.setState({seoTitle: e.target.value})} value={this.state.seoTitle?this.state.seoTitle:null} placeholder='Your story SEO title ..' />
                             </div>
                             <p style={{marginBottom:'5px', fontWeight: 'bold'}} >Story Url: {this.state.slugUrl} </p>
                         </div>
