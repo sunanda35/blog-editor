@@ -22,7 +22,8 @@ function App() {
           <Route component={user} path='/boot' exact />
           <Route component={editpage} path='/editurprofile' exact />
           <Route component={Stories} path='/stories' exact/>
-          <Route component={Write} path='/draft' exact/>
+          <Route component={Write} path='/draft/:slug'/>
+          <Route component={Write} path='/draft'/>
           <Route component={Stat} path='/stat' exact/>
           <Route component={Error} path='*' exact/>
         </Switch>

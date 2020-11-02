@@ -62,7 +62,6 @@ export default function Editpage({history}) {
             alert('Your Profile data successfully updated')
         }).catch(err=>alert(err.message))
     }
-    console.log(name, uBio, uName, uImage, git, linkdIN, twit)
     const uploadhandler =()=>{
         setImgload(true)
         if(currUser && image) storage.ref().child(`${currUser.uid}/profImg/${image.name}`).put(image).then(()=>{
