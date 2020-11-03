@@ -2,7 +2,6 @@ import React from 'react'
 import './write.css'
 import Footer from '../../components/footer/Footer'
 import Header from '../../components/header/Header'
-import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import PublishOutlinedIcon from '@material-ui/icons/PublishOutlined';
 import { Editor } from '@tinymce/tinymce-react';
 import { auth, db, storage } from '../../production/firebase'
@@ -10,9 +9,8 @@ import Modal from 'react-modal';
 import {title} from '../../production/Strings'
 import LoadingPic from '../../assets/spin2.svg'
 import Imgnot from '../../assets/imgnotavailable.png'
-import { firestore } from 'firebase';
-import { Redirect } from 'react-router-dom';
 import Cload from '../../reusable/loading/Load';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 Modal.setAppElement('#root')
 
@@ -73,14 +71,14 @@ export default class Draft extends React.Component{
 
 
     prevdataset(){
-        db.collection('draft').doc(this.state.urlID).set({
+        if(this.state.urlID && this.state.currUser)db.collection('draft').doc(this.state.urlID).set({
             'title': `${this.state.title}`,
             'seoTitle': `${this.state.seoTitle}`,
             'description': `${this.state.description}`,
             'userName': `${this.state.userName}`,
             'blog': `${this.state.story}`,
             'slugUrl': `${this.state.slugUrl}`,
-            'time': `${firestore.Timestamp.now()}`
+            'time': new Date()
         },{merge: true}).then(()=> this.setState({saving: false})).catch(err=>{
             this.setState({err: err.message})
             alert(err.message)
@@ -95,7 +93,7 @@ export default class Draft extends React.Component{
                     img: response.data().img,
                     description: response.data().description,
                     userName: response.data().userName,
-                    tags: response.data().tags,'userName': `${this.state.userName}`,
+                    tags: response.data().tags,
                     story: response.data().blog,
                     canonical: response.data().canonical,
                 })
@@ -108,9 +106,12 @@ export default class Draft extends React.Component{
         this.setState({load: true})
         if(this.state.currUser && this.state.image) storage.ref().child(`${this.state.currUser.uid}/blog/${this.state.image.name}`).put(this.state.image).then(()=>{
             if(this.state.currUser && this.state.img)storage.refFromURL(this.state.img).delete().catch(err=>console.log(err.message));
-            storage.ref(this.state.currUser.uid+'/blog').child(this.state.image.name).getDownloadURL().then((url)=>{
+            if(this.state.currUser && this.state.img)storage.ref(this.state.currUser.uid+'/blog').child(this.state.image.name).getDownloadURL().then((url)=>{
                 this.setState({img:url})
                 this.setState({load: false})
+                db.collection('draft').doc(this.state.urlID).set({
+                    img:this.state.img,
+                },{merge: true}).catch(err=>alert(err.message))
             }).catch(err=>{
                 this.setState({load: false})
                 alert(err.message)
@@ -129,8 +130,9 @@ export default class Draft extends React.Component{
                 'description': `${this.state.description}`,
                 'userName': `${this.state.userName}`,
                 'img': `${this.state.img}`,
-                'tags': `${this.state.tags}`,
-                'canonical': `${this.state.canonical}`
+                'tags': this.state.tags,
+                'canonical': `${this.state.canonical}`,
+                'subfor': true,
             },{merge: true}).then(()=>console.log('updated') ).catch(err=>alert(err.message))
             }
     
@@ -164,7 +166,7 @@ export default class Draft extends React.Component{
                     'userName': `${this.state.userName}`,
                     'blog': `${this.state.story}`,
                     'slugUrl': `${this.state.slugUrl}`,
-                    'time': `${firestore.Timestamp.now()}`
+                    'time': new Date()
                 },{merge: true}).then(()=> this.setState({saving: false})).catch(err=>{
                     this.setState({err: err.message})
                     alert(err.message)
@@ -367,16 +369,21 @@ export default class Draft extends React.Component{
                         <p style={{marginBottom:'5px'}} >When articles are published on more than one website, search engines use canonical links to determine and prioritize the ultimate source of content. If this content published on any website, please give link below..</p>
 
                             <div style={{
-                            width: '100%',
+                            width: '90%',
                             height: '45px', 
                             borderRadius:'5px', 
+                            display: 'flex',
+                            justifyContent: 'space-between',
                             backgroundColor: '#c9c9c9',
                             overflow:'hidden'}} >
                                 <input style={{
                                     width: '100%', 
                                     height: '100%', 
                                     border: 'none', 
-                                    backgroundColor: 'transparent'}} type='text' maxLength='100' onChange={e=>this.setState({canonical: e.target.value})} value={this.state.canonical?this.state.canonical:null} placeholder='Canonical url here ...' />
+                                    backgroundColor: 'transparent'}} type='text' 
+                                    onChange={e=>this.setState({canonical: e.target.value})} value={this.state.canonical?this.state.canonical:null} placeholder='Canonical url here ...' />
+                                <OpenInNewIcon fontSize='large'
+                                onClick={()=>window.open(this.state.canonical, '_blank')} />
                             </div>
                         </div>
                         </div>

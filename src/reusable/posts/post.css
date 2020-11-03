@@ -3,6 +3,7 @@
     margin-top: 5px;
     margin-bottom: 8px;
     border-bottom: 1px solid gray;
+    display: block;
     padding: 2px 2px 15px 2px;
     justify-content: space-between;
 }
@@ -19,14 +20,21 @@
     display: flex;
     padding: 2px;
     margin-top: auto;
-    color: rgb(121, 121, 121);
 }
 .auth > p{
     margin-right: 10px;
+    color: rgb(75, 75, 75);
+}
+.li>h3{
+    color: black;
+}
+.li>p{
+    color: rgb(145, 145, 145);
 }
 .a_icn_w, .a_icn_d{
     margin-right: 5px;
     cursor: pointer;
+    color: rgb(75, 75, 75);
 }
 
 .a_icn_w:hover{

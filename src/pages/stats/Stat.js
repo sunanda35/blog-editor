@@ -10,11 +10,15 @@ function Stat({history}) {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [currUser, setCurrUser] = useState()
+    const [userName, setUserName] = useState()
 
     useEffect(()=>{
         auth.onAuthStateChanged(user=>{
             if(user){
                 setCurrUser(user)
+                db.collection('author').doc(user.uid).get().then((lload)=>{
+                    setUserName(lload.data().userName)
+                }).catch(err=>alert(err.message))
             }else{
                 history.push('/login')
             }
@@ -23,7 +27,7 @@ function Stat({history}) {
 
 
     useEffect(()=>{
-        currUser && db.collection('posts').orderBy("views", "desc").where("userID", "==", currUser.uid).onSnapshot(snapshot => {
+        userName && db.collection('posts').orderBy("views", "desc").where("userName", "==", userName).onSnapshot(snapshot => {
             try{
                 setData(snapshot.docs.map(doc =>({
                     userid: doc.id,
@@ -34,7 +38,7 @@ function Stat({history}) {
             }
             setLoading(false)
         })
-    },[data, currUser])
+    },[data, userName])
     
 
 

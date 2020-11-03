@@ -14,7 +14,7 @@ import Privateroute from './reusable/authentication/privateroute';
 function App() {
   return (
     <Auth>
-      <BrowserRouter>
+      <BrowserRouter children={Route} forceRefresh={true} >
         <Switch>
           <Privateroute path='/' component={Signin} exact/>
           <Route component={Signin} path='/login' exact/>
