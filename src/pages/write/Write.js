@@ -217,19 +217,17 @@ export default class Draft extends React.Component{
                         'codesample',
                         'link',
                         'lists',
-                        'powerpaste',
                         'table',
                         'image',
                         'quickbars',
                         'codesample',
                         'embeded',
-                        'pageembed',
                         'media',
                         'code',
                         'help'
                       ],
                       toolbar:
-                       'backcolor | pageembed media | bullist numlist alignleft aligncenter alignright | quicktable | removeformat code| bullist numlist outdent indent ',
+                       'backcolor | media | bullist numlist alignleft aligncenter alignright | quicktable | removeformat code| bullist numlist outdent indent ',
                       quickbars_insert_toolbar: 'quicktable image media codesample',
                       quickbars_selection_toolbar: 'bold italic underline | formatselect | blockquote quicklink',
                       contextmenu: 'undo redo | inserttable | cell row column deletetable | help',
@@ -248,12 +246,12 @@ export default class Draft extends React.Component{
                      media_dimensions: true,
                      placeholder:'Brief Your Story',
                      plugins: [
-                       'advlist autolink lists link image charmap print preview anchor pageembed',
+                       'advlist autolink lists link image charmap print preview anchor ',
                        'searchreplace visualblocks code fullscreen',
                        'insertdatetime media table paste code help wordcount'
                      ],
                      toolbar:
-                       'formatselect | bold italic backcolor pageembed image media codesample| bullist numlist alignleft alignright | quicktable code | aligncenter |  removeformat | bullist numlist outdent indent ',
+                       'formatselect | bold italic backcolor image media codesample| bullist numlist alignleft alignright | quicktable code | aligncenter | removeformat | bullist numlist outdent indent ',
                    }}
                    onEditorChange={this.handleEditorChange}
                  />
