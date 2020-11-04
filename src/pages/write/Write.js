@@ -25,7 +25,7 @@ export default class Draft extends React.Component{
             description: '',
             userName: '',
             image: '',
-            tags: [],
+            tags: null,
             canonical: '',
             img: '',
             currUser: '',
@@ -201,16 +201,17 @@ export default class Draft extends React.Component{
                     </div>
                 </div>
                 <div className='draft'>
-                    <textarea className='d_title' maxLength='100' value={this.state.title?this.state.title:null} onChange={e=>this.setState({title: e.target.value})}></textarea>
+                    <textarea className='d_title' maxLength='100' value={this.state.title?this.state.title:null} placeholder={'Title'} onChange={e=>this.setState({title: e.target.value})}></textarea>
                 {
                     window.innerWidth>700?<Editor
                     apiKey="5h0owzmjio0t7clg6ux9vb8u3hvf1yyrsdixmprkzq2km53h"
-                    initialValue="<p>Brief your story here...</p>"
+                    // initialValue="<p>Brief your story here...</p>"
                     value={this.state.story?this.state.story:null}
                     init={{
                        height: 800,
                        menubar: false,
                        branding:false,
+                       placeholder:'Brief Your Story',
                        plugins: [
                         'autolink',
                         'codesample',
@@ -222,9 +223,13 @@ export default class Draft extends React.Component{
                         'quickbars',
                         'codesample',
                         'embeded',
+                        'pageembed',
+                        'media',
+                        'code',
                         'help'
                       ],
-                      toolbar: false,
+                      toolbar:
+                       'backcolor | pageembed media | bullist numlist alignleft aligncenter alignright | quicktable | removeformat code| bullist numlist outdent indent ',
                       quickbars_insert_toolbar: 'quicktable image media codesample',
                       quickbars_selection_toolbar: 'bold italic underline | formatselect | blockquote quicklink',
                       contextmenu: 'undo redo | inserttable | cell row column deletetable | help',
@@ -234,21 +239,21 @@ export default class Draft extends React.Component{
                      onEditorChange={this.handleEditorChange}
                    />:<Editor
                    apiKey="5h0owzmjio0t7clg6ux9vb8u3hvf1yyrsdixmprkzq2km53h"
-                   tinymceScriptSrc='/path/to/tinymce.min.js'
-                   initialValue="<p>Brief your story here...</p>"
+                //    initialValue="<p>Brief your story here...</p>"
                    value={this.state.story}
                    init={{
+                       width: 'auto',
                      height: 500,
-                    //  menubar: true,
-                    //  inline: true
                      branding: false,
+                     media_dimensions: true,
+                     placeholder:'Brief Your Story',
                      plugins: [
-                       'advlist autolink lists link image charmap print preview anchor',
+                       'advlist autolink lists link image charmap print preview anchor pageembed',
                        'searchreplace visualblocks code fullscreen',
                        'insertdatetime media table paste code help wordcount'
                      ],
                      toolbar:
-                       'undo redo | formatselect | bold italic backcolor |  alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
+                       'formatselect | bold italic backcolor pageembed image media codesample| bullist numlist alignleft alignright | quicktable code | aligncenter |  removeformat | bullist numlist outdent indent ',
                    }}
                    onEditorChange={this.handleEditorChange}
                  />
@@ -319,7 +324,7 @@ export default class Draft extends React.Component{
                                     width: '100%', 
                                     height: '100%', 
                                     border: 'none', 
-                                    backgroundColor: 'transparent'}} type='text' placeholder={this.state.tags} />
+                                    backgroundColor: 'transparent'}} type='text' onChange={e=>this.setState({tags: e.target.value})} placeholder={this.state.tags} />
                             </div>
                         </div>
                         
@@ -388,8 +393,16 @@ export default class Draft extends React.Component{
                         </div>
                         </div>
                         <p onClick={()=>{
-                            this.updatehandler()
-                            this.setState({submit: false})
+                            if(this.state.tags){
+                            try{
+                                this.updatehandler()
+                                this.setState({submit: false})
+                            }catch(err){
+                                alert(err.message)
+                            }
+                            }else{
+                                alert('Please add some tags, It really needed for any article. You can\'t submit this story for publish this article ')
+                            }
                         }} style={{
                             padding:'10px', 
                             width:'300px', 

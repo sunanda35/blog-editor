@@ -25,7 +25,6 @@ function Stat({history}) {
         })
     })
 
-
     useEffect(()=>{
         userName && db.collection('posts').orderBy("views", "desc").where("userName", "==", userName).onSnapshot(snapshot => {
             try{
@@ -35,6 +34,7 @@ function Stat({history}) {
                 })))
             } catch(err){
                 setLoading(false);
+                alert(err.message)
             }
             setLoading(false)
         })
@@ -52,7 +52,7 @@ function Stat({history}) {
             <div className='head_b'>
                 {
                     data.map((post, index)=>{
-                        return <Post title={post.title} description={post.description} time={post.time} views={post.views}/>
+                        return <Post key={index} title={post.title} description={post.description} time={post.time} views={post.views}/>
                     })
                 }
             </div>

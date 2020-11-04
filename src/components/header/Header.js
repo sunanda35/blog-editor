@@ -51,7 +51,7 @@ function Header({history}) {
                 <div className='header_icon_container'>
                 <Link className='draft_li' to='/draft'><h3>New Draft</h3></Link>
                     {
-                        curr?<Avatar onClick= {e=>setDropdown(!dropdown)}  className='h_avatar' src={profImg?profImg:'https://avatars3.githubusercontent.com/u/46472626?s=400&u=fbdf983ebbbed39b396e12718971d582c123d7f3&v=4'} alt='author-photo' />:<p>login</p>
+                        curr?<Avatar onClick= {e=>setDropdown(!dropdown)}  className='h_avatar' src={profImg?profImg:''} alt='author-photo' />:<Link className='draft_li' to='/login'><h3>login</h3></Link>
                     }
                 </div>
             {
